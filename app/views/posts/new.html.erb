@@ -1,0 +1,21 @@
+<div class="container">
+    <h1 class="text-center">Upload your post </h1>
+    <%= form_for @post do |f| %>
+        <%= render "devise/shared/error_messages", resource: @post %>
+        <div class="col-sm-4 mx-auto">
+            <div class="field col-form-label">
+                <%= f.label :description, "Add description about this post" %><br />
+                <%= f.text_field :description, class: "form-control" %>
+            </div>
+
+            <div class="input-group col-form-label">
+                <%= f.label :medias, "Upload your photo", class: "input-group-text", for: "inputGroupFile02" %><br />
+                <%= f.file_field :medias, class: "form-control" ,id: "inputGroupFile02", multiple: true %>
+            </div>
+
+            <div class="actions">
+                <%= f.submit "Upload your post", class: "btn btn-outline-success" %>
+            </div>
+        </div>
+    <% end %>
+</div>
