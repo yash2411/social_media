@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Takebook</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <%= render 'layouts/navbar' %>
+      <% if notice.present? || alert.present? %>
+        <div class="alert mt-2 <%= alert.present? ? 'alert-danger' : 'alert-success' %> alert-dismissible fade show" role="alert">
+          <%= alert.present? ? alert : notice %>.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
+</html>
