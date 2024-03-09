@@ -10,7 +10,6 @@ class LikesController < ApplicationController
 
     def destroy
         @like = current_user.likes.find_by(likeable: @post)
-        @post.destroy
         if @like.destroy
             render turbo_stream: turbo_stream.remove(@post)
         end
