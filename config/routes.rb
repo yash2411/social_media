@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'comments/index'
+  get 'comments/new'
   get 'pages/index'
 
   devise_for :users
@@ -8,5 +10,6 @@ Rails.application.routes.draw do
   root "pages#index"
   resources :posts
   resources :likes
+  resources :comments
   delete 'likes', to: 'likes#destroy'
 end

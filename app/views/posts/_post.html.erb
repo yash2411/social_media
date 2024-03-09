@@ -1,6 +1,8 @@
 <%= tag.div id: dom_id(post) do %>
   <div class="card text-center bg-info my-2" style="width: 18rem;">
-                <%= image_tag file_path(post.medias.first), class: "rounded mx-auto d-block" %>
+                <% if post.medias.attached? %>
+                    <%= image_tag file_path(post.medias.first), class: "rounded mx-auto d-block" %>
+                <% end %>
                 <h6 class="card-subtitle mb-2 text-body-secondary mt-2">by <%= post.user.first_name %> <%= post.user.last_name%> </h6>
                 <div class="card-body">
                     <p class="card-text"><%= post.description %></p>
@@ -9,20 +11,33 @@
                 <div class="card-footer text-body-secondary">
                     <%= time_ago_in_words(post.created_at) %> ago
                 </div>
-                <div class="row justify-content-between mb-2">
-                    <% if current_user_post_like?(post) %>
-                        <div class="col-sm-3"> 
-                            <%= pluralize(post.likes.count, "like") %>
-                            <%= link_to "Unlike", likes_path({id: post}), data: {turbo_stream: true, turbo_method: :delete} %>
+                <div class="mb-2 row">
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="">
+                                <%= pluralize(post.likes.count, "like") %>
+                            </div>
+                            <div class=""> 
+                                <% if current_user_post_like?(post) %>
+                                    
+                                    <%= link_to "Unlike", likes_path({id: post}), data: {turbo_stream: true, turbo_method: :delete} %>
+                                <% else %>
+                                    <%= link_to "Liked", likes_path({id: post}), data: {turbo_stream: true, turbo_method: :post} %>
+                                <% end %>
+                            </div>
+
                         </div>
-                    <% else %>
-                        <div class="col-sm-3"> 
-                            <%= pluralize(post.likes.count, "like") %>
-                            <%= link_to "Liked", likes_path({id: post}), data: {turbo_stream: true, turbo_method: :post} %>
+                    </div>
+                    <div class=" col-sm-4 flex-grow-1 p-0">
+                        <div class="row">
+                            <div class="">
+                                <%= pluralize(post.comments.count, "comment") %>
+                            </div>
+                            <div class="">
+                                <%= render 'shared/comments', {post: post} %> 
+                            </div>
                         </div>
-                    <% end %>
-                    <div class="col-sm-3"> 1 </div>
-                    <div class="col-sm-3"> 1 </div>
+                    </div>
                 </div>
             </div>
 <% end %>
