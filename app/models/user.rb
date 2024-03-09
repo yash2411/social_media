@@ -6,4 +6,5 @@ class User < ApplicationRecord
          
   validates :first_name, :last_name, presence: true
   has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
 end

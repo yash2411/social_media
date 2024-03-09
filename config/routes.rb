@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#index"
   resources :posts
+  resources :likes
+  delete 'likes', to: 'likes#destroy'
 end
