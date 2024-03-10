@@ -1,9 +1,16 @@
 <%= tag.div id: dom_id(post) do %>
   <div class="card text-center bg-info my-2" style="width: 18rem;">
-                <% if post.medias.attached? %>
-                    <%= image_tag file_path(post.medias.first), class: "rounded mx-auto d-block" %>
-                <% end %>
-                <h6 class="card-subtitle mb-2 text-body-secondary mt-2">by <%= post.user.first_name %> <%= post.user.last_name%> </h6>
+                <h6 class="card-subtitle mb-2 text-body-secondary mt-2"> <%= post.user.first_name %> <%= post.user.last_name%> </h6>
+
+                <div class="row">
+                    <% if post.medias.attached? %>
+                        <% post.medias.each do |media| %>
+                            <div class="col-md-6">
+                                <%= image_tag file_path(media), class: "rounded mx-auto d-block w-100 mt-2" %>
+                            </div>
+                        <% end %>
+                    <% end %>
+                </div>
                 <div class="card-body">
                     <p class="card-text"><%= post.description %></p>
                     <%= link_to "View Post", post_path(post), class: "btn btn-dark" %>
@@ -14,15 +21,15 @@
                 <div class="mb-2 row">
                     <div class="col-sm-4">
                         <div class="row">
-                            <div class="">
+                            <div class="text-center">
                                 <%= pluralize(post.likes.count, "like") %>
                             </div>
-                            <div class=""> 
+                            <div class="text-center"> 
                                 <% if current_user_post_like?(post) %>
                                     
                                     <%= link_to "Unlike", likes_path({id: post}), data: {turbo_stream: true, turbo_method: :delete} %>
                                 <% else %>
-                                    <%= link_to "Liked", likes_path({id: post}), data: {turbo_stream: true, turbo_method: :post} %>
+                                    <%= link_to "Like", likes_path({id: post}), data: {turbo_stream: true, turbo_method: :post} %>
                                 <% end %>
                             </div>
 
