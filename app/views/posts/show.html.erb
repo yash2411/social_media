@@ -1,4 +1,3 @@
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
     <div class="row">
         <div class="col-md-8">
@@ -24,7 +23,7 @@
                   <turbo-frame id="messages">
                   <div class="post-comment">
                     <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="profile-photo-sm">
-                     <%= render 'shared/comments', {post: @post} %> 
+                     <%= render 'shared/comment_form', {post: @post} %> 
                   </div>
                   <turbo-frame id="messages">
                     <div class="line-divider"></div>

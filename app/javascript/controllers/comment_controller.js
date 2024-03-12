@@ -7,7 +7,6 @@ export default class extends Controller {
   }
 
   greet() {
-    console.log("hello")
     this.element.querySelector("#addANote").value = ''
   }
 }

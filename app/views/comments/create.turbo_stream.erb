@@ -1,21 +1,17 @@
 <turbo-stream action="append" target="messages">
   <template>
-                    <div class="line-divider"></div>
-                    <%= render partial: 'comments/comment', formats: [:html], locals: { comment: @comment } %>
+    <div class="line-divider"></div>
+      <%= render partial: 'comments/comment', formats: [:html], locals: { comment: @comment } %>
   </template>
 </turbo-stream>
 
 <turbo-stream action="replace" target="counts">
   <template>
-                  <turbo-frame id="counts">
-
-<div class="reaction">
-                    <%= pluralize(@post.likes.count, "like") %></br>
-                    <%= pluralize(@post.comments.count, "comment") %>
-
-                  </div>
-                  </turbo-frame>
-
+    <turbo-frame id="counts">
+      <div class="reaction">
+        <%= pluralize(@post.likes.count, "like") %></br>
+        <%= pluralize(@post.comments.count, "comment") %>
+      </div>
+    </turbo-frame>
   </template>
-  
 </turbo-stream>

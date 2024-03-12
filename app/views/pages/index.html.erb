@@ -1,6 +1,8 @@
 <%= link_to "Upload post", new_post_path, class: "btn btn-outline-success mt-4" %>
 <%= will_paginate @posts, class: "digg_pagination text-center w-25 mx-auto my-4" %>
 
-<%= render 'shared/posts', {posts: @posts} %>
+<div class="container col-sm-4 mx-auto mt-4">
+    <%= render @posts %>
+</div>
 
 <%= will_paginate @posts, class: "digg_pagination text-center w-25 mx-auto my-4" %>
