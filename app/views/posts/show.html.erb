@@ -1,0 +1,38 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="post-content">
+              <%= image_tag file_path(@post.medias.first), class: "img-responsive post-image" %>
+              <div class="post-container">
+                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user" class="profile-photo-md pull-left">
+                <div class="post-detail">
+                  <div class="user-info">
+                    <h5><a href="timeline.html" class="profile-link"><%= @post.user.first_name%></a> <span class="following">following</span></h5>
+                    <p class="text-muted"><%= time_ago_in_words(@post.created_at) %> ago</p>
+                  </div>
+                  <turbo-frame id="counts">
+                  <div class="reaction">
+                    <%= pluralize(@post.likes.count, "like") %></br>
+                    <%= pluralize(@post.comments.count, "comment") %>
+                  </div>
+                  </turbo-frame>
+                  <div class="line-divider"></div>
+                  <div class="post-text">
+                    <p><%= @post.description %>.<i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+                  </div>
+                  <turbo-frame id="messages">
+                  <div class="post-comment">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="profile-photo-sm">
+                     <%= render 'shared/comments', {post: @post} %> 
+                  </div>
+                  <turbo-frame id="messages">
+                    <div class="line-divider"></div>
+                    <%= render @post.comments %>
+                  </turbo-frame>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

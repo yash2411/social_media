@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   resources :posts
   resources :likes
   resources :comments
+  post 'add_reply', to: 'comments#add_reply'
   delete 'likes', to: 'likes#destroy'
 end

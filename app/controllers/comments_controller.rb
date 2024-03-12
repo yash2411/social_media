@@ -11,14 +11,24 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(comments_params)
     @comment.post = @post
     if @comment.save
-        render turbo_stream: turbo_stream.replace(@post)
+      respond_to do |format|
+        format.turbo_stream {  }
+      end
+    end
+  end
+
+  def add_reply
+    @comment = current_user.comments.build(comments_params)
+    @comment.post = @post
+    if @comment.save
+      render turbo_stream: turbo_stream.replace(@post)
     end
   end
 
   private
 
   def comments_params
-    params.require(:comment).permit(:content)
+    params.require(:comment).permit(:content, :parent_id, :post_id)
   end
 
   def fetch_post

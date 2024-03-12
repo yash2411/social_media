@@ -19,6 +19,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments.fetch_post_comments
+
   end
 
   private

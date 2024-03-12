@@ -11,4 +11,8 @@ module ApplicationHelper
         like = Like.where(user: current_user, likeable: post).first
         like ? true : false
     end
+
+    def parent_comments(post)
+        post.comments.where(parent_id: nil)
+    end
 end

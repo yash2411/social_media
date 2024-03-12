@@ -26,11 +26,11 @@
                                 <% if current_user_post_like?(post) %>
                                     
                                     <%= link_to likes_path({id: post}), data: {turbo_stream: true, turbo_method: :delete} do %>
-                                        <i class="fa-solid fa-heart fa-2xl" style="color: #e31621;"></i>
+                                        Unlike
                                     <% end %>
                                 <% else %>
                                     <%= link_to likes_path({id: post}), data: {turbo_stream: true, turbo_method: :post} do %>
-                                        <i class="fa-regular fa-heart fa-2xl" style="color: #e1dada;"></i>
+                                        Like
                                     <% end %>
                                 <% end %>
                             </div>
@@ -41,9 +41,6 @@
                         <div class="row">
                             <div class="my-2">
                                 <%= pluralize(post.comments.count, "comment") %>
-                            </div>
-                            <div class="my-2">
-                                <%= render 'shared/comments', {post: post} %> 
                             </div>
                         </div>
                     </div>
