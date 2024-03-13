@@ -1,0 +1,11 @@
+<div>
+  <% if current_user_post_like?(post) %> 
+    <%= link_to likes_path({id: post.id}), data: {turbo_method: :delete} do %> 
+      Unlike 
+    <% end %> 
+  <% else %> 
+    <%= link_to likes_path({id: post.id}), data: {turbo_method: :post} do %> 
+      Like 
+    <% end %> 
+  <% end %>
+</div>

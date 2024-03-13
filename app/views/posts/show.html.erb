@@ -1,37 +1,216 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="post-content">
-              <%= image_tag file_path(@post.medias.first), class: "img-responsive post-image" %>
-              <div class="post-container">
-                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user" class="profile-photo-md pull-left">
-                <div class="post-detail">
-                  <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link"><%= @post.user.first_name%></a> <span class="following">following</span></h5>
-                    <p class="text-muted"><%= time_ago_in_words(@post.created_at) %> ago</p>
+<link
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+  rel="stylesheet"
+/>
+
+<div id="main-content" class="blog-page">
+  <div class="container">
+    <div class="row clearfix">
+      <div class="col-lg-8 col-md-12 left-box">
+        <div class="card single_post">
+          <div class="body">
+            <div class="row">
+              <% if @post.medias.attached? %> <% @post.medias.each do |media| %>
+              <div class="col-md-4">
+                <img
+                  src="<%= file_path(media) %>"
+                  class="d-block w-100 img-fluid w-50 rounded m-1"
+                  alt="Image description for image"
+                />
+              </div>
+              <% end %> <% end %>
+            </div>
+            <h3 class="mt-4">
+              <a href="blog-details.html">All photographs are accurate</a>
+            </h3>
+            <p><%= @post.description %>.</p>
+          </div>
+        </div>
+        <turbo-frame id="likes">
+          <div>
+            <% if current_user_post_like?(@post) %> <%= link_to likes_path({id:
+            @post.id}), data: {turbo_method: :delete} do %> Unlike <% end %> <%
+            else %> <%= link_to likes_path({id: @post.id}), data: {turbo_method:
+            :post} do %> Like <% end %> <% end %>
+          </div>
+        </turbo-frame>
+        <div class="card mt-4">
+          <%= render 'shared/comment_form', {post: @post} %>
+        </div>
+        <div class="card">
+          <turbo-frame id="counts">
+            <div class="header">
+              <h2><%= pluralize(@post.comments.count, "comment") %></h2>
+            </div>
+          </turbo-frame>
+          <turbo-frame id="messages">
+            <div style="height: 600px" class="overflow-y-scroll">
+              <%= render @post.comments %>
+            </div>
+          </turbo-frame>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12 right-box">
+        <div class="card">
+          <div class="body search">
+            <div class="input-group m-b-0">
+              <div class="input-group-prepend">
+                <span class="input-group-text"
+                  ><i class="fa fa-search"></i
+                ></span>
+              </div>
+              <input type="text" class="form-control" placeholder="Search..." />
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="header">
+            <h2>Categories Clouds</h2>
+          </div>
+          <div class="body widget">
+            <ul class="list-unstyled categories-clouds m-b-0">
+              <li><a href="javascript:void(0);">eCommerce</a></li>
+              <li><a href="javascript:void(0);">Microsoft Technologies</a></li>
+              <li><a href="javascript:void(0);">Creative UX</a></li>
+              <li><a href="javascript:void(0);">Wordpress</a></li>
+              <li><a href="javascript:void(0);">Angular JS</a></li>
+              <li><a href="javascript:void(0);">Enterprise Mobility</a></li>
+              <li><a href="javascript:void(0);">Website Design</a></li>
+              <li><a href="javascript:void(0);">HTML5</a></li>
+              <li><a href="javascript:void(0);">Infographics</a></li>
+              <li><a href="javascript:void(0);">Wordpress Development</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="header">
+            <h2>Popular Posts</h2>
+          </div>
+          <div class="body widget popular-post">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="single_post">
+                  <p class="m-b-0">Apple Introduces Search Ads Basic</p>
+                  <span>jun 22, 2018</span>
+                  <div class="img-post">
+                    <img
+                      src="https://www.bootdey.com/image/280x280/87CEFA/000000"
+                      alt="Awesome Image"
+                    />
                   </div>
-                  <turbo-frame id="counts">
-                  <div class="reaction">
-                    <%= pluralize(@post.likes.count, "like") %></br>
-                    <%= pluralize(@post.comments.count, "comment") %>
+                </div>
+                <div class="single_post">
+                  <p class="m-b-0">new rules, more cars, more races</p>
+                  <span>jun 8, 2018</span>
+                  <div class="img-post">
+                    <img
+                      src="https://www.bootdey.com/image/280x280/87CEFA/000000"
+                      alt="Awesome Image"
+                    />
                   </div>
-                  </turbo-frame>
-                  <div class="line-divider"></div>
-                  <div class="post-text">
-                    <p><%= @post.description %>.<i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                  </div>
-                  <turbo-frame id="messages">
-                  <div class="post-comment">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="profile-photo-sm">
-                     <%= render 'shared/comment_form', {post: @post} %> 
-                  </div>
-                  <turbo-frame id="messages">
-                    <div class="line-divider"></div>
-                    <%= render @post.comments %>
-                  </turbo-frame>
                 </div>
               </div>
             </div>
+          </div>
         </div>
+        <div class="card">
+          <div class="header">
+            <h2>Instagram Post</h2>
+          </div>
+          <div class="body widget">
+            <ul class="list-unstyled instagram-plugin m-b-0">
+              <li>
+                <a href="javascript:void(0);"
+                  ><img
+                    src="https://www.bootdey.com/image/100x100/87CEFA/000000"
+                    alt="image description"
+                /></a>
+              </li>
+              <li>
+                <a href="javascript:void(0);"
+                  ><img
+                    src="https://www.bootdey.com/image/100x100/87CEFA/000000"
+                    alt="image description"
+                /></a>
+              </li>
+              <li>
+                <a href="javascript:void(0);"
+                  ><img
+                    src="https://www.bootdey.com/image/100x100/87CEFA/000000"
+                    alt="image description"
+                /></a>
+              </li>
+              <li>
+                <a href="javascript:void(0);"
+                  ><img
+                    src="https://www.bootdey.com/image/100x100/87CEFA/000000"
+                    alt="image description"
+                /></a>
+              </li>
+              <li>
+                <a href="javascript:void(0);"
+                  ><img
+                    src="https://www.bootdey.com/image/100x100/87CEFA/000000"
+                    alt="image description"
+                /></a>
+              </li>
+              <li>
+                <a href="javascript:void(0);"
+                  ><img
+                    src="https://www.bootdey.com/image/100x100/87CEFA/000000"
+                    alt="image description"
+                /></a>
+              </li>
+              <li>
+                <a href="javascript:void(0);"
+                  ><img
+                    src="https://www.bootdey.com/image/100x100/87CEFA/000000"
+                    alt="image description"
+                /></a>
+              </li>
+              <li>
+                <a href="javascript:void(0);"
+                  ><img
+                    src="https://www.bootdey.com/image/100x100/87CEFA/000000"
+                    alt="image description"
+                /></a>
+              </li>
+              <li>
+                <a href="javascript:void(0);"
+                  ><img
+                    src="https://www.bootdey.com/image/100x100/87CEFA/000000"
+                    alt="image description"
+                /></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="header">
+            <h2>
+              Email Newsletter
+              <small
+                >Get our products/news earlier than others, let’s get in
+                touch.</small
+              >
+            </h2>
+          </div>
+          <div class="body widget newsletter">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Email"
+              />
+              <div class="input-group-append">
+                <span class="input-group-text"
+                  ><i class="icon-paper-plane"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

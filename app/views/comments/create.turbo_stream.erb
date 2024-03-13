@@ -1,16 +1,20 @@
-<turbo-stream action="append" target="messages">
+<turbo-stream action="replace" target="messages">
   <template>
-    <div class="line-divider"></div>
-      <%= render partial: 'comments/comment', formats: [:html], locals: { comment: @comment } %>
+    <turbo-frame id="messages">
+      <div style="height: 600px" class="overflow-y-scroll">
+        <% @post.comments.each do |comment| %> <%= render partial:
+        'comments/comment', formats: [:html], locals: { comment: comment } %> <%
+        end %>
+      </div>
+    </turbo-frame>
   </template>
 </turbo-stream>
 
 <turbo-stream action="replace" target="counts">
   <template>
     <turbo-frame id="counts">
-      <div class="reaction">
-        <%= pluralize(@post.likes.count, "like") %></br>
-        <%= pluralize(@post.comments.count, "comment") %>
+      <div class="header">
+        <h2><%= pluralize(@post.comments.count, "comment") %></h2>
       </div>
     </turbo-frame>
   </template>

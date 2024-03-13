@@ -1,9 +1,6 @@
 class CommentsController < ApplicationController
   before_action :fetch_post
 
-  def index
-  end
-
   def new
   end
 

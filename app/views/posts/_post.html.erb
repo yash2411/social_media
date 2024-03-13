@@ -1,47 +1,55 @@
-<%= tag.span id: dom_id(post) do %>
-    <div class="card text-center bg-secondary my-2" style="width: 18rem;">
-        <div class="card-footer text-body-secondary">
-            <%= post.user.first_name %> <%= post.user.last_name%> posted <%= time_ago_in_words(post.created_at) %> ago
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+  integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA="
+  crossorigin="anonymous"
+/>
+
+<div class="col-4">
+  <div class="row mt-n5">
+    <div
+      class="mt-5 wow fadeInUp"
+      data-wow-delay=".2s"
+      style="
+        visibility: visible;
+        animation-delay: 0.2s;
+        animation-name: fadeInUp;
+      "
+    >
+      <div class="blog-grid">
+        <div class="blog-grid-img position-relative">
+          <% if post.medias.attached? %>
+            <%= image_tag file_path(post.medias.first), class: "rounded mx-auto d-block w-100 mt-2" %>
+          <% end %>
         </div>
-        <div class="row">
-            <% if post.medias.attached? %>
-                <% post.medias.each do |media| %>
-                    <div class="col-md-6">
-                        <%= image_tag file_path(media), class: "rounded mx-auto d-block w-100 mt-2" %>
-                    </div>
-                <% end %>
-            <% end %>
-        </div>
-        <div class="card-body">
-            <p class="card-text"><%= post.description %></p>
+        <div class="blog-grid-text p-4">
+          <h3 class="h5 mb-3">
+            <a href="#!">Business tool for your customer</a>
+          </h3>
+          <p class="display-30">
+            <%= truncate(post.description,length: 50) %>.
+          </p>
+          <div class="card-body">
             <%= link_to "View Post", post_path(post), class: "btn btn-dark" %>
+          </div>
+          <div class="meta meta-style2">
+            <ul>
+              <li>
+                <a href="#!"
+                  ><i class="fas fa-calendar-alt"></i><%= time_ago_in_words(post.created_at) %> ago
+                  </a
+                >
+              </li>
+              <li>
+                  <a href="#!"><i class="fas fa-regular fa-heart"></i> <%= pluralize(post.likes.count, 'like') %></a>
+              </li>
+              <li>
+                <a href="#!"><i class="fas fa-comments"></i> <%= pluralize(post.comments.count, 'comment') %></a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="mb-2 row">
-            <div class="col-sm-4">
-                <div class="row">
-                    <div class="text-center my-2">
-                        <%= pluralize(post.likes.count, "like") %>
-                    </div>
-                    <div class="text-center my-2"> 
-                        <% if current_user_post_like?(post) %>
-                            <%= link_to likes_path({id: post}), data: {turbo_stream: true, turbo_method: :delete} do %>
-                                Unlike
-                            <% end %>
-                        <% else %>
-                            <%= link_to likes_path({id: post}), data: {turbo_stream: true, turbo_method: :post} do %>
-                                Like
-                            <% end %>
-                        <% end %>
-                    </div>
-                </div>
-            </div>
-            <div class=" col-sm-4 flex-grow-1 p-0">
-                <div class="row">
-                    <div class="my-2">
-                        <%= pluralize(post.comments.count, "comment") %>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-<% end %>
+  </div>
+</div>

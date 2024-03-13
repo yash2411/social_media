@@ -4,14 +4,18 @@ class LikesController < ApplicationController
     def create
         @like = Like.find_or_initialize_by(likeable: fetch_post, user: current_user)
         if @like.save
-            render turbo_stream: turbo_stream.replace(@post)
+            respond_to do |format|
+                format.turbo_stream {  }
+              end
         end
     end
 
     def destroy
         @like = current_user.likes.find_by(likeable: @post)
         if @like.destroy
-            render turbo_stream: turbo_stream.replace(@post)
+            respond_to do |format|
+                format.turbo_stream {  }
+              end
         end
     end
 
