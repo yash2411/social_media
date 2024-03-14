@@ -66,6 +66,7 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    acts_as_follower (0.2.1)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
     base64 (0.2.0)
@@ -226,6 +227,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    socialization (2.0.1)
+      activerecord
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -276,6 +279,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  acts_as_follower
   bootsnap
   byebug
   capybara
@@ -292,6 +296,7 @@ DEPENDENCIES
   rails (~> 7.0.8, >= 7.0.8.1)
   sassc-rails
   selenium-webdriver
+  socialization
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails

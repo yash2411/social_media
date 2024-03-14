@@ -81,3 +81,4 @@ gem "cssbundling-rails", "~> 1.4"
 gem "jsbundling-rails", "~> 1.3"
 gem "font-awesome-sass", "~> 6.1" 
 gem 'font_awesome5_rails'
+gem "socialization"
