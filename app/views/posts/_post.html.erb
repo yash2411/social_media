@@ -18,6 +18,9 @@
     >
       <div class="blog-grid">
         <div class="blog-grid-img position-relative">
+          <div class="card-header text-center mt-2">
+            Posted by <%= post.user.first_name %> - <%= time_ago_in_words(post.created_at) %> ago
+          </div>
           <% if post.medias.attached? %>
             <%= image_tag file_path(post.medias.first), class: "rounded mx-auto d-block w-100 mt-2" %>
           <% end %>
@@ -27,24 +30,25 @@
             <a href="#!">Business tool for your customer</a>
           </h3>
           <p class="display-30">
-            <%= truncate(post.description,length: 50) %>.
+            <%= truncate(post.caption,length: 50) %>.
           </p>
           <div class="card-body">
-            <%= link_to "View Post", post_path(post), class: "btn btn-dark" %>
+            <%= link_to "View Post", post_path(post), class: "stretch-link text-primary" %>
           </div>
           <div class="meta meta-style2">
-            <ul>
-              <li>
-                <a href="#!"
-                  ><i class="fas fa-calendar-alt"></i><%= time_ago_in_words(post.created_at) %> ago
-                  </a
-                >
-              </li>
+            <ul class="d-flex justify-content-between">
               <li>
                   <a href="#!"><i class="fas fa-regular fa-heart"></i> <%= pluralize(post.likes.count, 'like') %></a>
               </li>
+              <%= turbo_frame_tag 'comment_form' do %>
+                <li>
+                  <%= link_to new_comment_path({comment: {post_id: post.id}}) do %>
+                    <i class="fas fa-comments"></i> <%= pluralize(post.comments.count, 'comment') %>
+                  <% end %>
+                </li>
+              <% end %>
               <li>
-                <a href="#!"><i class="fas fa-comments"></i> <%= pluralize(post.comments.count, 'comment') %></a>
+                <a href="#!"><i class="fas fa-eye"></i> <%= pluralize(post.views, 'view') %></a>
               </li>
             </ul>
           </div>

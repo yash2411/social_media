@@ -1,0 +1,16 @@
+<%= turbo_frame_tag "users_posts" do %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <p class="lead fw-normal mb-0">Recent photos</p>
+</div>
+
+<div class="row">
+  <% @user.posts.each do |post| %>
+      <div class="col-6 mb-5">
+        <%= link_to post_path({id: post.id}), data: {turbo: false} do %>
+          <%= image_tag file_path(post.medias.first), class: "w-100 rounded-3" %>
+        <% end %>
+      </div>
+  <% end %>
+</div>
+<% end %>
