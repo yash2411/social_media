@@ -9,6 +9,11 @@
         <li class="nav-item">
             <%= link_to "Home", root_path , class: "nav-link #{current_path?(root_path)}" %>
         </li>
+
+        <li class="nav-item">
+            <%= link_to "Friends List", root_path , class: "nav-link #{current_path?(root_path)}" %>
+        </li>
+        
         <% if !current_user %>
             <li class="nav-item">
             <%= link_to "Login", new_user_session_path , class: "nav-link #{current_path?(new_user_session_path)}" %>
@@ -31,10 +36,10 @@
             </li>
         <% end %>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <%= form_with scope: :user, url: search_user_path, html: {class: 'd-flex'}, method: :get do |f| %>
+        <%= f.search_field :username, class: "form-control me-2", placeholder: "Search User" %>
+        <%= f.submit "Search", class: "btn btn-outline-success" %>
+      <% end %>
     </div>
   </div>
 </nav>

@@ -11,6 +11,12 @@ Rails.application.routes.draw do
   resources :posts
   resources :likes
   resources :comments
+  resources :follows
+  resources :profiles, only: [:show]
   post 'add_reply', to: 'comments#add_reply'
+  get 'turbo_frame_posts', to: "posts#turbo_frame_posts"
+  get 'all_users_posts', to: "posts#all_users_posts"
   delete 'likes', to: 'likes#destroy'
+  get 'search_user', to: 'follows#search_user'
+  
 end

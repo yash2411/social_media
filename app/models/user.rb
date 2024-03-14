@@ -11,4 +11,17 @@ class User < ApplicationRecord
 
   has_one_attached :photo
 
+  acts_as_followable
+  acts_as_follower
+
+  before_save { self.username = self.username.downcase }
+
+  def followers_count
+    self.followers(User).count
+  end
+
+  def following_count
+    self.followees(User).count
+  end
+
 end
