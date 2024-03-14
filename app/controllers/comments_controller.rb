@@ -1,7 +1,10 @@
 class CommentsController < ApplicationController
   before_action :fetch_post
+  def turbo_frame_comment
+  end
 
   def new
+    render :turbo_frame_comment
   end
 
   def create

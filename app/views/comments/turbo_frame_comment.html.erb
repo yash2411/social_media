@@ -1,0 +1,5 @@
+<%= turbo_frame_tag 'comment_form' do %>
+    <div>
+        <%= render partial: 'shared/comment_form', formats: [:html], locals: {post: @post} %>
+    </div>
+<% end %>
