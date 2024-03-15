@@ -1,0 +1,17 @@
+<turbo-stream action="replace" target="user_data">
+    <template>
+        <turbo-frame id="user_data">
+            <div class="mt-4 d-flex">
+              <% if current_user == @user %>
+                <%= button_to "Edit Profile", root_path, class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
+                data: { mdb_ripple_color: "dark" } %>
+              <% else %>
+                <%= button_to current_user.follows?(@user) ? "Unfollow" : "Follow", toggle_follow_path({id: @user.id}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
+                data: { mdb_ripple_color: "dark" } %>
+                <%= button_to "Chat", root_path, class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
+                data: { mdb_ripple_color: "dark" } %>
+              <% end %>
+            </div>
+          </turbo-frame>
+    </template>
+</turbo-stream>

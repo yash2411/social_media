@@ -13,10 +13,6 @@
                   alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                   style="width: 150px; z-index: 1">
                 <% end %>
-                <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
-                  style="z-index: 1;">
-                  Edit profile
-                </button>
               </div>
               <div class="ms-3" style="margin-top: 130px;">
                 <h5><%= full_name(@user) %></h5>
@@ -39,6 +35,19 @@
                 </div>
               </div>
             </div>
+            <turbo-frame id="user_data">
+              <div class="mt-4 d-flex">
+                <% if current_user == @user %>
+                  <%= button_to "Edit Profile", profile_path, class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
+                  data: { mdb_ripple_color: "dark" } %>
+                <% else %>
+                  <%= button_to current_user.follows?(@user) ? "Unfollow" : "Follow", toggle_follow_path({id: @user.id}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
+                  data: { mdb_ripple_color: "dark" } %>
+                  <%= button_to "Chat", profile_path, class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
+                  data: { mdb_ripple_color: "dark" } %>
+                <% end %>
+              </div>
+            </turbo-frame>
             <div class="card-body p-4 text-black">
               <div class="mb-5">
                 <p class="lead fw-normal mb-1">About</p>

@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   get 'all_users_posts', to: "posts#all_users_posts"
   delete 'likes', to: 'likes#destroy'
   get 'search_user', to: 'follows#search_user'
+  post 'toggle_follow', to: 'follows#toggle_follow'
   
 end
