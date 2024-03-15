@@ -1,5 +1,5 @@
 <% @users.each do |user| %>
-<section style="background-color: #eee;">
+<section class="mt-4" style="background-color: #eee;">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-md-9 col-lg-7 col-xl-5">
@@ -26,13 +26,17 @@
                   <div class="d-flex flex-row align-items-center mb-2">
                     <p class="mb-0 me-2"><%= user.username %></p>
                   </div>
-                  <div>
-                    <button type="button" class="btn btn-outline-dark btn-rounded btn-sm"
-                      data-mdb-ripple-color="dark">+ Follow</button>
-                    <%= link_to "See Profile", profile_path(user), class: "btn btn-outline-dark btn-rounded btn-sm", data_mdb_ripple_color: "dark" %>
-                    <button type="button" class="btn btn-outline-dark btn-floating btn-sm"
-                      data-mdb-ripple-color="dark"><i class="fas fa-comment"></i></button>
-                  </div>
+                  <%= link_to "See Profile", profile_path(user), class: "btn btn-outline-dark btn-rounded btn-sm", data_mdb_ripple_color: "dark" %>
+                  <turbo-frame id="user_data">
+                    <div class="mt-4 d-flex">
+                        <% unless current_user == user %>
+                          <%= button_to current_user.follows?(user) ? "Unfollow" : "Follow", toggle_follow_path({id: user.id}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
+                          data: { mdb_ripple_color: "dark" } %>
+                          <%= button_to "Chat", '#', class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
+                          data: { mdb_ripple_color: "dark" } %>
+                        <% end %>
+                    </div>
+                  </turbo-frame>
                 </div>
               </div>
               <hr>

@@ -8,6 +8,11 @@ class FollowsController < ApplicationController
         end
     end
 
+    def friends_list
+        @users = current_user.followees(User)
+        render 'search_user'
+    end
+
     def search_user
         @users = User.where("username LIKE ?", "%#{params[:user][:username].downcase}%")
     end
