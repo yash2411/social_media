@@ -42,7 +42,7 @@
               </li>
               <%= turbo_frame_tag 'comment_form' do %>
                 <li>
-                  <%= link_to new_comment_path({comment: {post_id: post.id}}) do %>
+                  <%= link_to new_post_comment_path(post) do %>
                     <i class="fas fa-comments"></i> <%= pluralize(post.comments.count, 'comment') %>
                   <% end %>
                 </li>

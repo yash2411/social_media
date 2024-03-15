@@ -1,11 +1,11 @@
 <turbo-frame id="likes">
   <div>
     <% if current_user_post_like?(post) %> 
-      <%= link_to likes_path({id: post.id}), data: {turbo_method: :delete} do %> 
+      <%= link_to likes_path({post_id: post.id}), data: {turbo_method: :delete} do %> 
         Unlike
       <% end %> 
     <% else %> 
-      <%= link_to likes_path({id: post.id}), data: {turbo_method: :post} do %> 
+      <%= link_to post_likes_path(post), data: {turbo_method: :post} do %> 
         Like
       <% end %> 
     <% end %>

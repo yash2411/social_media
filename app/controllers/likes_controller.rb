@@ -22,6 +22,6 @@ class LikesController < ApplicationController
     private
 
     def fetch_post
-        @post = Post.find_by(id: params[:id])
+        @post = Post.find_by(id: params[:post_id])
     end
 end

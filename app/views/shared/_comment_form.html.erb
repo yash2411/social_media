@@ -3,8 +3,7 @@
     <div class="card shadow-0 border-0" style="background-color: #f0f2f5;">
       <div class="card-body p-0">
         <div class="form-outline">
-            <%= form_with scope: :comment, url: comments_path, data: {controller: 'comment', action: "turbo:submit-end->comment#greet" } do |f| %>
-                <%= f.hidden_field :post_id, value: post.id %>
+            <%= form_with scope: :comment, url: post_comments_path(post), data: {controller: 'comment', action: "turbo:submit-end->comment#greet" } do |f| %>
                 <%= f.text_field :content, id: "addANote", class: "form-control", placeholder: "Type comment..." %>
             <% end %>
         </div>

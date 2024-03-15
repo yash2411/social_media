@@ -32,6 +32,6 @@ class CommentsController < ApplicationController
   end
 
   def fetch_post
-    @post = Post.find_by(id: params[:comment][:post_id])
+    @post = Post.find_by(id: params[:post_id])
   end
 end
