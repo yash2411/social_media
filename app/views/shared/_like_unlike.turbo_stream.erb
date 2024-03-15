@@ -2,11 +2,11 @@
   <div>
     <% if current_user_post_like?(post) %> 
       <%= link_to likes_path({post_id: post.id}), data: {turbo_method: :delete} do %> 
-        Unlike
+        <%= image_tag 'like.jpg', width: "100", height: "100" %>
       <% end %> 
     <% else %> 
       <%= link_to post_likes_path(post), data: {turbo_method: :post} do %> 
-        Like
+        <%= image_tag 'unlike.jpg', width: "100", height: "100" %>
       <% end %> 
     <% end %>
   </div>
