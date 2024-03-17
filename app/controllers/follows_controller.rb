@@ -11,7 +11,12 @@ class FollowsController < ApplicationController
 
     def friends_list
         @users = current_user.followees(User)
-        render 'search_user'
+        if @users.empty?
+            flash.now[:notice] = "No friends yet!"
+            render 'search_user'
+        else
+            render 'search_user'
+        end
     end
 
     def search_user

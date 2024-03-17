@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
     @user = User.find(params[:id])
     session[:user_id] = current_user.id
     @message = Message.new
-    @messages = Message.all
+    @messages = Message.where(sender: current_user, receiver: @user)
   end
 
   def create

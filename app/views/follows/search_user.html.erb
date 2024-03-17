@@ -27,12 +27,16 @@
                   
                   <turbo-frame id="user_data">
                     <div class="mt-4 d-flex">
-                        <%= link_to "See Profile", profile_path(user), class: "stretched-link btn btn-outline-dark btn-rounded btn-sm", data_mdb_ripple_color: "dark", data: {turbo: false}%>
+                        <%= link_to "See Profile", profile_path(user), class: "btn btn-outline-dark btn-rounded btn-sm", data_mdb_ripple_color: "dark", data: {turbo: false} %>
+                        
                         <% unless current_user == user %>
+
                           <%= button_to current_user.follows?(user) ? "Unfollow" : "Follow", toggle_follow_path({id: user.id, search: true}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
                           data: { mdb_ripple_color: "dark" } %>
+
                           <%= link_to "Chat", messages_path({id: user.id}) , class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
                           data: { mdb_ripple_color: "dark", turbo: false } %>
+
                         <% end %>
                     </div>
                   </turbo-frame>

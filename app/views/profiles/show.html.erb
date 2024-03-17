@@ -51,9 +51,7 @@
               <div class="mb-5">
                 <p class="lead fw-normal mb-1">About</p>
                 <div class="p-4" style="background-color: #46b08fbd">
-                  <p class="font-italic mb-1">Web Developer</p>
-                  <p class="font-italic mb-1">Lives in New York</p>
-                  <p class="font-italic mb-0">Photographer</p>
+                  <p class="font-italic mb-1"><%= @user.bio %></p>
                 </div>
               </div>
               <%= turbo_frame_tag "users_posts" do %>
@@ -66,11 +64,20 @@
               </div>
 
               <div class="row">
-                <% @user.posts.limit(2).each do |post| %>
-                  <div class="col-6 mb-5">
-                    <%= link_to post_path({id: post.id}), data: {turbo: false} do %>
-                        <%= image_tag file_path(post.medias.first), class: "w-100 rounded-3" %>
-                    <% end %>
+                <% if @user.posts.present? %>
+                  <% @user.posts.limit(2).each do |post| %>
+                    <div class="col-6 mb-5">
+                      <%= link_to post_path({id: post.id}), data: {turbo: false} do %>
+                          <%= image_tag file_path(post.medias.first), class: "w-100 rounded-3" %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <div class="alert alert-success d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                    <div>
+                      There's nothing to display
+                    </div>
                   </div>
                 <% end %>
               </div>
