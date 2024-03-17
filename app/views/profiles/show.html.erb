@@ -35,7 +35,7 @@
               </div>
             </div>
             <turbo-frame id="user_data" style="background-color: #46b08fbd">
-              <div class="mt-4 d-flex">
+              <div class="mt-4 d-flex justify-content-center">
                 <% if current_user == @user %>
                   <%= button_to "Edit Profile", profile_path, class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
                   data: { mdb_ripple_color: "dark" } %>
