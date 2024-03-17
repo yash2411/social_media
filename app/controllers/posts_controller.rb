@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      flash.now[:notice] = "Your post published successfully"
+      flash[:notice] = "Your post has been published successfully"
       redirect_to root_path
     else
       render 'new'

@@ -2,6 +2,7 @@ class FollowsController < ApplicationController
     before_action :fetch_user, only: :toggle_follow
 
     def toggle_follow
+        @search = params[:search]
         current_user.toggle_follow!(@user)
         respond_to do |format|
             format.turbo_stream { }

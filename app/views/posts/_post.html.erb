@@ -22,15 +22,15 @@
             Posted by <%= post.user.first_name %> - <%= time_ago_in_words(post.created_at) %> ago
           </div>
           <% if post.medias.attached? %>
-            <%= image_tag file_path(post.medias.first), class: "rounded mx-auto d-block w-50 mt-2 " %>
+            <%= image_tag file_path(post.medias.first), class: "rounded mx-auto d-block w-75 mt-2 " %>
           <% end %>
         </div>
         <div class="blog-grid-text p-4">
           <p class="display-30 text-center">
             <%= truncate(post.caption,length: 50) %>.
           </p>
-          <div class="card-body">
-            <%= link_to "View Post", post_path(post), class: "stretched-link text-primary" %>
+          <div class="card-body text-center">
+            <%= link_to "View Post", post_path(post), class: "stretched-link link-dark" %>
           </div>
           <div class="meta meta-style2">
             <ul class="d-flex justify-content-between">

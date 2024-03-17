@@ -4,11 +4,11 @@
 />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<div id="main-content" class="blog-page">
+<div id="main-content" class="blog-page mt-4">
   <div class="container" style="background-color: #46b08fbd">
     <div class="row clearfix">
       <div class="col-lg-8 col-md-12 left-box">
-        <div class="card single_post" style="background-color: #a0cabdbd">
+        <div class="card single_post mt-4" style="background-color: #a0cabdbd">
           <div class="body">
             <div class="row">
               <% if @post.medias.attached? %> 
@@ -26,21 +26,23 @@
             <p class="mt-4 text-dark"><%= @post.caption %>.</p>
           </div>
         </div>
-        <turbo-frame id="likes">
+        <div class="d-flex justify-content-start align-items-center">
+          <turbo-frame id="likes">
+            <div>
+              <% if current_user_post_like?(@post) %> 
+                <%= link_to likes_path({post_id: @post.id}), data: {turbo_method: :delete} do %> 
+                  <%= image_tag 'like.png', width: "65", height: "65"  %>
+                <% end %> 
+              <% else %> 
+                <%= link_to post_likes_path(@post), data: {turbo_method: :post} do %> 
+                  <%= image_tag 'unlike.png', width: "65", height: "65" %>
+                <% end %> 
+              <% end %>
+            </div>            
+          </turbo-frame>
           <div>
-            <% if current_user_post_like?(@post) %> 
-              <%= link_to likes_path({post_id: @post.id}), data: {turbo_method: :delete} do %> 
-                <%= image_tag 'like.jpg', width: "100", height: "100"  %>
-              <% end %> 
-            <% else %> 
-              <%= link_to post_likes_path(@post), data: {turbo_method: :post} do %> 
-                <%= image_tag 'unlike.jpg', width: "100", height: "100" %>
-              <% end %> 
-            <% end %>
-          </div>            
-        </turbo-frame>
-        <div>
-          <%= render 'shared/comment_form', {post: @post} %>
+            <%= render 'shared/comment_form', {post: @post} %>
+          </div>
         </div>
         <div class="card">
           <turbo-frame id="counts">

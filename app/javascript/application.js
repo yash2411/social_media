@@ -8,3 +8,4 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // app/javascript/packs/application.js
 import '@fortawesome/fontawesome-free/js/all';
 require("@fortawesome/fontawesome-free")
+

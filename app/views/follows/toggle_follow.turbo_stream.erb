@@ -2,15 +2,22 @@
     <template>
         <turbo-frame id="user_data" style="background-color: #46b08fbd">
             <div class="mt-4 d-flex">
-              <% if current_user == @user %>
-                <%= button_to "Edit Profile", root_path, class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
+              <% if @search %>
+                <%= link_to "See Profile", profile_path(@user, {search: true}), class: "btn btn-outline-dark btn-rounded btn-sm", data_mdb_ripple_color: "dark", data: {turbo: false} %>
+                <%= button_to current_user.follows?(@user) ? "Unfollow" : "Follow", toggle_follow_path({id: @user.id, search:  true}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
                 data: { mdb_ripple_color: "dark" } %>
               <% else %>
-                <%= button_to current_user.follows?(@user) ? "Unfollow" : "Follow", toggle_follow_path({id: @user.id}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
+                <% if current_user == @user %>
+                  <%= button_to "Edit Profile", root_path, class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
+                  data: { mdb_ripple_color: "dark" } %>
+                <% else %>
+                  <%= button_to current_user.follows?(@user) ? "Unfollow" : "Follow", toggle_follow_path({id: @user.id}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
                 data: { mdb_ripple_color: "dark" } %>
-                <%= link_to "Chat", messages_path({id: @user.id}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
-                  data: { mdb_ripple_color: "dark", turbo: false } %>
+                <% end %>
               <% end %>
+              <%= link_to "Chat", messages_path({id: @user.id}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
+              data: { mdb_ripple_color: "dark", turbo: false } %>
+              
             </div>
           </turbo-frame>
     </template>

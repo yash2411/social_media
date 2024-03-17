@@ -5,7 +5,7 @@
         <% if comment.user.photo.attached? %>
           <%= image_tag file_path(comment.user.photo), style: "width: 150px; z-index: 1", class: "img-fluid img-thumbnail" %>
         <% else %>
-          <%= image_tag 'profile.png', style: "width: 150px; z-index: 1", class: "img-fluid img-thumbnail" %>
+          <%= image_tag 'user.png', style: "width: 150px; z-index: 1", class: "img-fluid img-thumbnail" %>
         <% end %>
       </div>
       <div class="text-box col-md-10 col-8 p-l-0 p-r0">

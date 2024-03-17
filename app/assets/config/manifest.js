@@ -4,3 +4,4 @@
 //= link post.css
 //= link all_post.css
 //= link chat.css
+//= link form.css
