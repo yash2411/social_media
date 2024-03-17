@@ -1,9 +1,9 @@
 <% @users.each do |user| %>
-<section class="mt-4" style="background-color: #eee;">
+<section class="mt-4">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-md-9 col-lg-7 col-xl-5">
-          <div class="card bg-secondary" style="border-radius: 15px;">
+          <div class="card" style="border-radius: 15px; background-color: #46b08fbd" >
             <div class="card-body p-4 text-black">
               <div>
                 <h6 class="mb-4">Exquisite hand henna tattoo</h6>
@@ -17,9 +17,7 @@
                     <% if user.photo.attached? %>
                         <%= image_tag file_path(user.photo), class: "img-fluid rounded-circle border border-dark border-3", style: "width: 70px;" %>
                     <% else %>
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp"
-                        alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
-                        style="width: 70px;">
+                      <%= image_tag 'profile.png', class: "img-fluid rounded-circle border border-dark border-3" %>
                     <% end %>
                 </div>
                 <div class="flex-grow-1 ms-3">

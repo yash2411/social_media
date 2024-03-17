@@ -7,11 +7,10 @@
             <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
               <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
                 <% if @user.photo.attached? %>
-                  <%= image_tag file_path(@user.photo), class: "img-fluid img-thumbnail mt-4 mb-2" %>
+                  <%= image_tag file_path(@user.photo), style: "width: 150px; z-index: 1", class: "img-fluid img-thumbnail mt-4 mb-2" %>
                 <% else %>
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                  alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                  style="width: 150px; z-index: 1">
+                  <%= image_tag 'profile.png', style: "width: 150px; z-index: 1", class: "img-fluid img-thumbnail mt-4 mb-2" %>
+
                 <% end %>
               </div>
               <div class="ms-3" style="margin-top: 130px;">
@@ -43,8 +42,8 @@
                 <% else %>
                   <%= button_to current_user.follows?(@user) ? "Unfollow" : "Follow", toggle_follow_path({id: @user.id}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
                   data: { mdb_ripple_color: "dark" } %>
-                  <%= button_to "Chat", profile_path, class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
-                  data: { mdb_ripple_color: "dark" } %>
+                  <%= link_to "Chat", messages_path({id: @user.id}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
+                  data: { mdb_ripple_color: "dark", turbo: false } %>
                 <% end %>
               </div>
             </turbo-frame>

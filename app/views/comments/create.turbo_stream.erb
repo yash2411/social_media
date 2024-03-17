@@ -1,6 +1,6 @@
 <turbo-stream action="replace" target="messages">
   <template>
-    <turbo-frame id="messages">
+    <turbo-frame id="messages" style="background-color: #46b08fbd">
       <div style="height: 600px" class="overflow-y-scroll">
         <% @post.comments.each do |comment| %> <%= render partial:
         'comments/comment', formats: [:html], locals: { comment: comment } %> <%
@@ -13,7 +13,7 @@
 <turbo-stream action="replace" target="counts">
   <template>
     <turbo-frame id="counts">
-      <div class="header">
+      <div class="header" style="background-color: #46b08fbd">
         <h2><%= pluralize(@post.comments.count, "comment") %></h2>
       </div>
     </turbo-frame>

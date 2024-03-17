@@ -16,39 +16,36 @@
         animation-name: fadeInUp;
       "
     >
-      <div class="blog-grid">
+      <div class="blog-grid" style="background-color: #46b08fbd">
         <div class="blog-grid-img position-relative">
           <div class="card-header text-center mt-2">
             Posted by <%= post.user.first_name %> - <%= time_ago_in_words(post.created_at) %> ago
           </div>
           <% if post.medias.attached? %>
-            <%= image_tag file_path(post.medias.first), class: "rounded mx-auto d-block w-100 mt-2" %>
+            <%= image_tag file_path(post.medias.first), class: "rounded mx-auto d-block w-50 mt-2 " %>
           <% end %>
         </div>
         <div class="blog-grid-text p-4">
-          <h3 class="h5 mb-3">
-            <a href="#!">Business tool for your customer</a>
-          </h3>
-          <p class="display-30">
+          <p class="display-30 text-center">
             <%= truncate(post.caption,length: 50) %>.
           </p>
           <div class="card-body">
-            <%= link_to "View Post", post_path(post), class: "stretch-link text-primary" %>
+            <%= link_to "View Post", post_path(post), class: "stretched-link text-primary" %>
           </div>
           <div class="meta meta-style2">
             <ul class="d-flex justify-content-between">
               <li>
-                  <a href="#!"><i class="fas fa-regular fa-heart"></i> <%= pluralize(post.likes.count, 'like') %></a>
+                  <p class="text-dark"><i class="fas fa-regular fa-heart"></i> <%= pluralize(post.likes.count, 'like') %></>
               </li>
               <%= turbo_frame_tag 'comment_form' do %>
-                <li>
-                  <%= link_to new_post_comment_path(post) do %>
+                <li >
+                  <%= link_to new_post_comment_path(post), class: "text-dark" do %>
                     <i class="fas fa-comments"></i> <%= pluralize(post.comments.count, 'comment') %>
                   <% end %>
                 </li>
               <% end %>
               <li>
-                <a href="#!"><i class="fas fa-eye"></i> <%= pluralize(post.views, 'view') %></a>
+                <p class="text-dark" ><i class="fas fa-eye"></i> <%= pluralize(post.views, 'view') %></>
               </li>
             </ul>
           </div>
