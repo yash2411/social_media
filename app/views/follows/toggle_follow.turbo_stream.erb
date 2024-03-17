@@ -1,6 +1,6 @@
 <turbo-stream action="replace" target="user_data">
     <template>
-        <turbo-frame id="user_data">
+        <turbo-frame id="user_data" style="background-color: #46b08fbd">
             <div class="mt-4 d-flex">
               <% if current_user == @user %>
                 <%= button_to "Edit Profile", root_path, class: "btn btn-outline-dark btn-rounded btn-sm mx-1",

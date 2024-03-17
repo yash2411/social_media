@@ -18,7 +18,7 @@
                 <p>New York</p>
               </div>
             </div>
-            <div class="p-4 text-black" style="background-color: #f8f9fa;">
+            <div class="p-4 text-black" style="background-color: #46b08fbd">
               <div class="d-flex justify-content-end text-center py-1">
                 <div>
                   <p class="mb-1 h5"><%= @user.posts.count %></p>
@@ -34,7 +34,7 @@
                 </div>
               </div>
             </div>
-            <turbo-frame id="user_data">
+            <turbo-frame id="user_data" style="background-color: #46b08fbd">
               <div class="mt-4 d-flex">
                 <% if current_user == @user %>
                   <%= button_to "Edit Profile", profile_path, class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
@@ -47,10 +47,10 @@
                 <% end %>
               </div>
             </turbo-frame>
-            <div class="card-body p-4 text-black">
+            <div class="card-body p-4 text-black" style="background-color: #46b08fbd">
               <div class="mb-5">
                 <p class="lead fw-normal mb-1">About</p>
-                <div class="p-4" style="background-color: #f8f9fa;">
+                <div class="p-4" style="background-color: #46b08fbd">
                   <p class="font-italic mb-1">Web Developer</p>
                   <p class="font-italic mb-1">Lives in New York</p>
                   <p class="font-italic mb-0">Photographer</p>
