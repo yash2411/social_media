@@ -50,7 +50,7 @@
           </turbo-frame>
           <turbo-frame id="messages" style="background-color: #46b08fbd">
             <div style="height: 600px" class="overflow-y-scroll">
-              <%= render @post.comments %>
+              <%= render @post.comments.order(created_at: :desc) %>
             </div>
           </turbo-frame>
         </div>

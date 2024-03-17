@@ -2,7 +2,7 @@
   <template>
     <turbo-frame id="messages" style="background-color: #46b08fbd">
       <div style="height: 600px" class="overflow-y-scroll">
-        <% @post.comments.each do |comment| %> <%= render partial:
+        <% @comments.each do |comment| %> <%= render partial:
         'comments/comment', formats: [:html], locals: { comment: comment } %> <%
         end %>
       </div>

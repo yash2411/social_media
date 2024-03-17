@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.build(comments_params)
     @comment.post = @post
+    @comments = @post.comments.order(created_at: :desc)
     if @comment.save
       respond_to do |format|
         format.turbo_stream {  }
