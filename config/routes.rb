@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  mount ActionCable.server => '/cable'
+  
   devise_for :users
 
   root "pages#index"
@@ -12,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :follows
+  resources :messages
   resources :profiles, only: [:show]
 
   delete 'likes_path', to: 'likes#destroy'

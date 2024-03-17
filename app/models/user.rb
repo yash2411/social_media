@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :sender_messages, class_name: "Message", dependent: :destroy, foreign_key: :sender_id
+  has_many :receiver_messages, class_name: "Message", dependent: :destroy, foreign_key: :receiver_id
 
   has_one_attached :photo
 

@@ -8,5 +8,7 @@ export default class extends Controller {
 
   greet() {
     this.element.querySelector("#addANote").value = ''
+    const ele = document.querySelector(".chat-history");
+    ele.scrollTo(100, ele.scrollHeight);
   }
 }

@@ -1,0 +1,16 @@
+<% if message.sender_id == id %>
+    <li class="clearfix">
+        <div class="message other-message float-right"> <%= message.body %>
+            <figcaption class="figure-caption text-right"><%= message.created_at.strftime("%I:%M %p, %A") %></figcaption>
+        
+        </div>
+
+    </li>
+<% else %>
+    <li class="clearfix">
+        <div class="message my-message">
+            <%= message.body %>
+            <figcaption class="figure-caption text-right"><%= message.created_at.strftime("%I:%M %p, %A") %></figcaption>   
+        </div>                                 
+    </li>  
+<% end %>

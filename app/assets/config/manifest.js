@@ -3,3 +3,4 @@
 //= link application.js
 //= link post.css
 //= link all_post.css
+//= link chat.css

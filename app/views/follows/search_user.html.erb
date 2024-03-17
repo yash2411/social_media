@@ -32,8 +32,8 @@
                         <% unless current_user == user %>
                           <%= button_to current_user.follows?(user) ? "Unfollow" : "Follow", toggle_follow_path({id: user.id}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
                           data: { mdb_ripple_color: "dark" } %>
-                          <%= button_to "Chat", '#', class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
-                          data: { mdb_ripple_color: "dark" } %>
+                          <%= link_to "Chat", messages_path({id: user.id}) , class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
+                          data: { mdb_ripple_color: "dark", turbo: false } %>
                         <% end %>
                     </div>
                   </turbo-frame>

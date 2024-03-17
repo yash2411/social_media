@@ -11,4 +11,8 @@ module ApplicationHelper
         like = Like.where(user: current_user, likeable: post).first
         like ? true : false
     end
+
+    def get_current_user
+        session[:user_id]
+    end
 end
