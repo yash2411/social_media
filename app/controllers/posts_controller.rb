@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :update_last_seen_at
 
   def index
     @posts = current_user.posts

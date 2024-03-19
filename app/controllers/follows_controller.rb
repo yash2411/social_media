@@ -1,5 +1,6 @@
 class FollowsController < ApplicationController
     before_action :fetch_user, only: :toggle_follow
+    before_action :update_last_seen_at
 
     def toggle_follow
         @search = params[:search]

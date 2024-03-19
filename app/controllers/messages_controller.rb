@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+  before_action :update_last_seen_at
+
   def index
     @user = User.find(params[:id])
     session[:user_id] = current_user.id

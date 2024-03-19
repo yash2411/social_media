@@ -7,8 +7,5 @@ import { application } from "./application"
 import CommentController from "./comment_controller"
 application.register("comment", CommentController)
 
-import FormController from "./form_controller";
-application.register("form", FormController);
-
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)

@@ -1,5 +1,7 @@
 class LikesController < ApplicationController
     before_action :fetch_post
+    before_action :update_last_seen_at
+
 
     def create
         @like = Like.find_or_initialize_by(likeable: fetch_post, user: current_user)

@@ -1,0 +1,5 @@
+# Example schedule.yml
+update_user_status_cron:
+  class: UpdateUserStatusJob 
+  cron: '* * * * *' 
+

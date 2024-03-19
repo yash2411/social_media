@@ -1,5 +1,8 @@
 class CommentsController < ApplicationController
   before_action :fetch_post
+  before_action :update_last_seen_at
+
+  
   def turbo_frame_comment
   end
 
