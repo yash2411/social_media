@@ -1,6 +1,7 @@
 class FollowsController < ApplicationController
     before_action :fetch_user, only: :toggle_follow
     before_action :update_last_seen_at
+    before_action :suggested_users, only: [:search_user, :friends_list]
 
     def toggle_follow
         @search = params[:search]
@@ -28,5 +29,17 @@ class FollowsController < ApplicationController
 
     def fetch_user
         @user = User.find_by_id(params[:id])
+    end
+
+    def suggested_users
+        followed_user_ids = current_user.followees(User).pluck(:id)
+        suggested_friends_ids = Follow.where(follower_id: followed_user_ids)
+                                    .pluck(:followable_id)
+                                    .uniq 
+        suggested_friends_ids -= followed_user_ids
+        @suggested_friends = User.where(id: suggested_friends_ids)
+        if @suggested_friends.empty?
+            @suggested_friends = User.where.not(id: followed_user_ids << current_user.id)
+        end
     end
 end

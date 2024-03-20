@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
 
     def show
         @user = User.find_by_id(params[:id])
-        @followers = @user.followers_count
-        @following = @user.following_count
+        @followers = NumericalNotation.to_short_notation(@user.followers_count)
+        @following = NumericalNotation.to_short_notation(@user.following_count)
     end
 end

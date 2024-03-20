@@ -41,3 +41,7 @@
     </div>
   </section>
 <% end %>
+<% if @suggested_friends.present? %>
+  <h2 class="text-center my-4">Suggested Friends</h2>
+  <%= render partial: 'suggested_users', locals: {suggested_friends: @suggested_friends} %>
+<% end %>

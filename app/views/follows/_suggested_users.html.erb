@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+      <div class="col-md-8">
+        <div class="people-nearby">
+          <% suggested_friends.each do |user| %>
+            <div class="nearby-user">
+              <div class="row">
+                <div class="col-md-2 col-sm-2">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                </div>
+                <div class="col-md-7 col-sm-7">
+                  <h5><a href="#" class="profile-link"><%= user.username %></a></h5>
+                  <p>Software Engineer</p>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                  <turbo-frame id="follow_button" style="background-color: #46b08fbd">
+                    <%= button_to current_user.follows?(user) ? "Unfollow" : "Follow", toggle_follow_path({id: user.id}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1 pull-right",
+                    data: { mdb_ripple_color: "dark" } %>
+                  </turbo-frame>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+    </div>
+</div>
+</div>

@@ -15,3 +15,12 @@
       </turbo-frame>
     </template>
 </turbo-stream>
+
+<turbo-stream action="replace" target="follow_button">
+  <template>
+    <turbo-frame id="follow_button" style="background-color: #46b08fbd">
+          <%= button_to current_user.follows?(@user) ? "Unfollow" : "Follow", toggle_follow_path({id: @user.id}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1",
+          data: { mdb_ripple_color: "dark" } %>
+    </turbo-frame>
+  </template>
+</turbo-stream>

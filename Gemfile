@@ -83,3 +83,4 @@ gem "font-awesome-sass", "~> 6.1"
 gem 'font_awesome5_rails'
 gem "socialization"
 gem 'sidekiq-cron'
+gem 'numerical_notation', '~> 0.0.2'

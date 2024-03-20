@@ -5,3 +5,4 @@
 //= link all_post.css
 //= link chat.css
 //= link form.css
+//= link suggested_users.css
