@@ -51,7 +51,7 @@
               <div class="mb-5">
                 <p class="lead fw-normal mb-1">About</p>
                 <div class="p-4" style="background-color: #46b08fbd">
-                  <p class="font-italic mb-1"><%= @user.bio %></p>
+                  <p class="font-italic mb-1"><%= raw(@user.bio.gsub(/\r?\n/, "<br>")) %></p>
                 </div>
               </div>
               <%= turbo_frame_tag "users_posts" do %>
