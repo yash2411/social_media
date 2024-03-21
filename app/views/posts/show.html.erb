@@ -10,7 +10,7 @@
       <div class="col-lg-8 col-md-12 left-box">
         <div class="card single_post mt-4" style="background-color: #a0cabdbd">
           <div class="body">
-            <div class="row">
+            <div class="row d-flex justify-content-center">
               <% if @post.medias.attached? %> 
                 <% @post.medias.each do |media| %>
                   <div class="col-md-4">
@@ -27,19 +27,7 @@
           </div>
         </div>
         <div class="d-flex justify-content-start align-items-center">
-          <turbo-frame id="likes">
-            <div>
-              <% if current_user_post_like?(@post) %> 
-                <%= link_to likes_path({post_id: @post.id}), data: {turbo_method: :delete} do %> 
-                  <%= image_tag 'like.png', width: "65", height: "65"  %>
-                <% end %> 
-              <% else %> 
-                <%= link_to post_likes_path(@post), data: {turbo_method: :post} do %> 
-                  <%= image_tag 'unlike.png', width: "65", height: "65" %>
-                <% end %> 
-              <% end %>
-            </div>            
-          </turbo-frame>
+          
           <div>
             <%= render 'shared/comment_form', {post: @post} %>
           </div>

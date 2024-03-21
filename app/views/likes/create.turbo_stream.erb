@@ -1,4 +1,4 @@
-<turbo-stream action="replace" target="likes">
+<turbo-stream action="replace" target="likes_<%= @post.id %>">
   <template>
       <%= render partial: 'shared/like_unlike', locals: {post: @post} %>
     </turbo-frame>
