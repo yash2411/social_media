@@ -1,27 +1,51 @@
-<div class="container">
-  <div class="row">
-      <div class="col-md-8">
-        <div class="people-nearby">
-          <% suggested_friends.each do |user| %>
-            <div class="nearby-user">
-              <div class="row">
-                <div class="col-md-2 col-sm-2">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+<div class="row d-flex justify-content-center">
+  <section class="mt-4 col-6">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <% suggested_friends.each do |user| %>
+
+          <div class="col col-md-9 col-lg-7 col-xl-5">
+            <div class="card" style="border-radius: 15px; background-color: #46b08fbd" >
+              <div class="card-body p-4 text-black">
+                <div>
+                  <h6 class="mb-4">Exquisite hand henna tattoo</h6>
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                    <p class="small mb-0"><i class="far fa-clock me-2"></i>3 hrs</p>
+                    <p class="fw-bold mb-0">$90</p>
+                  </div>
                 </div>
-                <div class="col-md-7 col-sm-7">
-                  <h5><a href="#" class="profile-link"><%= user.username %></a></h5>
-                  <p>Software Engineer</p>
+                <div class="d-flex align-items-center mb-4">
+                  <div class="flex-shrink-0">
+                      <% if user.photo.attached? %>
+                          <%= image_tag file_path(user.photo), class: "img-fluid rounded-circle border border-dark border-3", style: "width: 70px;" %>
+                      <% else %>
+                        <%= image_tag 'user.png', class: "img-fluid rounded-circle border border-dark border-3", width: 100, height: 100 %>
+                      <% end %>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <div class="d-flex flex-row align-items-center mb-2">
+                      <p class="mb-0 me-2"><%= user.username %></p>
+                    </div>
+                    
+                      <div class="mt-4 d-flex ">
+                        <div>
+                          <%= link_to "See Profile", profile_path(user), class: "btn btn-outline-dark btn-rounded btn-sm", data_mdb_ripple_color: "dark", data: {turbo: false} %>
+                        </div>
+                        <turbo-frame id="follow_button" style="background-color: #46b08fbd">
+                          <%= button_to current_user.follows?(user) ? "Unfollow" : "Follow", toggle_follow_path({id: user.id}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1 pull-right",
+                          data: { mdb_ripple_color: "dark" } %>
+                        </turbo-frame>
+                      </div>
+                  </div>
                 </div>
-                <div class="col-md-3 col-sm-3">
-                  <turbo-frame id="follow_button" style="background-color: #46b08fbd">
-                    <%= button_to current_user.follows?(user) ? "Unfollow" : "Follow", toggle_follow_path({id: user.id}), class: "btn btn-outline-dark btn-rounded btn-sm mx-1 pull-right",
-                    data: { mdb_ripple_color: "dark" } %>
-                  </turbo-frame>
-                </div>
+                <hr>
+                <p class="my-4 pb-1"><%= pluralize(user.posts.count, 'post') %></p>
               </div>
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
+
+      </div>
     </div>
-</div>
+  </section>
 </div>

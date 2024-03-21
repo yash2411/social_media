@@ -1,47 +1,47 @@
-<% @users.each do |user| %>
 <section class="mt-4">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col col-md-9 col-lg-7 col-xl-5">
-          <div class="card" style="border-radius: 15px; background-color: #46b08fbd" >
-            <div class="card-body p-4 text-black">
-              <div>
-                <h6 class="mb-4">Exquisite hand henna tattoo</h6>
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                  <p class="small mb-0"><i class="far fa-clock me-2"></i>3 hrs</p>
-                  <p class="fw-bold mb-0">$90</p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center mb-4">
-                <div class="flex-shrink-0">
-                    <% if user.photo.attached? %>
-                        <%= image_tag file_path(user.photo), class: "img-fluid rounded-circle border border-dark border-3", style: "width: 70px;" %>
-                    <% else %>
-                      <%= image_tag 'user.png', class: "img-fluid rounded-circle border border-dark border-3", width: 100, height: 100 %>
-                    <% end %>
-                </div>
-                <div class="flex-grow-1 ms-3">
-                  <div class="d-flex flex-row align-items-center mb-2">
-                    <p class="mb-0 me-2"><%= user.username %></p>
+        <% @users.each do |user| %>
+          <div class="col col-md-9 col-lg-7 col-xl-5">
+            <div class="card" style="border-radius: 15px; background-color: #46b08fbd" >
+              <div class="card-body p-4 text-black">
+                <div>
+                  <h6 class="mb-4">Exquisite hand henna tattoo</h6>
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                    <p class="small mb-0"><i class="far fa-clock me-2"></i>3 hrs</p>
+                    <p class="fw-bold mb-0">$90</p>
                   </div>
-                  
-                    <div class="mt-4 d-flex ">
-                      <div>
-                        <%= link_to "See Profile", profile_path(user), class: "btn btn-outline-dark btn-rounded btn-sm", data_mdb_ripple_color: "dark", data: {turbo: false} %>
-                      </div>
-                    </div>
                 </div>
+                <div class="d-flex align-items-center mb-4">
+                  <div class="flex-shrink-0">
+                      <% if user.photo.attached? %>
+                          <%= image_tag file_path(user.photo), class: "img-fluid rounded-circle border border-dark border-3", style: "width: 70px;" %>
+                      <% else %>
+                        <%= image_tag 'user.png', class: "img-fluid rounded-circle border border-dark border-3", width: 100, height: 100 %>
+                      <% end %>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <div class="d-flex flex-row align-items-center mb-2">
+                      <p class="mb-0 me-2"><%= user.username %></p>
+                    </div>
+                    
+                      <div class="mt-4 d-flex ">
+                        <div>
+                          <%= link_to "See Profile", profile_path(user), class: "btn btn-outline-dark btn-rounded btn-sm", data_mdb_ripple_color: "dark", data: {turbo: false} %>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <hr>
+                <p class="my-4 pb-1"><%= pluralize(user.posts.count, 'post') %></p>
               </div>
-              <hr>
-              <p class="my-4 pb-1"><%= pluralize(user.posts.count, 'post') %></p>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
     </div>
   </section>
-<% end %>
 <% if @suggested_friends.present? %>
-  <h2 class="text-center my-4">Suggested Friends</h2>
+  <h2 class="text-center my-4">People you might know</h2>
   <%= render partial: 'suggested_users', locals: {suggested_friends: @suggested_friends} %>
 <% end %>

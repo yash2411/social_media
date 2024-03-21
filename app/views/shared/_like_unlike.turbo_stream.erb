@@ -1,13 +1,12 @@
-<turbo-frame id="likes">
-  <div>
-    <% if current_user_post_like?(post) %> 
-      <%= link_to likes_path({post_id: post.id}), data: {turbo_method: :delete} do %> 
-        <%= image_tag 'like.png', width: "65", height: "65" %>
-      <% end %> 
-    <% else %> 
-      <%= link_to post_likes_path(post), data: {turbo_method: :post} do %> 
-        <%= image_tag 'unlike.png', width: "65", height: "65" %>
-      <% end %> 
-    <% end %>
-  </div>
+<turbo-frame id="likes_<%= post.id %>">
+  <% if current_user_post_like?(post) %> 
+    <%= link_to likes_path({post_id: post.id}), data: {turbo_method: :delete} do %> 
+      <i class="fas fa-heart"></i>
+    <% end %> 
+  <% else %> 
+    <%= link_to post_likes_path(post), data: {turbo_method: :post} do %> 
+      <i class="fas fa-heart"></i>
+    <% end %> 
+  <% end %>
+  <%= pluralize(post.likes.count, 'like') %> 
 </turbo-frame>

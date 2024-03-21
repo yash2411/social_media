@@ -1,7 +1,7 @@
 class FollowsController < ApplicationController
     before_action :fetch_user, only: :toggle_follow
     before_action :update_last_seen_at
-    before_action :suggested_users, only: [:search_user, :friends_list]
+    before_action :suggested_users, except: [:toggle_follow, :search_user]
 
     def toggle_follow
         @search = params[:search]
@@ -11,7 +11,17 @@ class FollowsController < ApplicationController
         end
     end
 
-    def friends_list
+    def followees_list
+        @users = current_user.followers(User)
+        if @users.empty?
+            flash.now[:notice] = "No friends yet!"
+            render 'search_user'
+        else
+            render 'search_user'
+        end
+    end
+
+    def followers_list
         @users = current_user.followees(User)
         if @users.empty?
             flash.now[:notice] = "No friends yet!"

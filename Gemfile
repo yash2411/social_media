@@ -52,6 +52,18 @@ gem "sassc-rails"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 
+gem "cssbundling-rails", "~> 1.4"
+
+gem "jsbundling-rails", "~> 1.3"
+
+gem "socialization"
+
+# To process the cron jobs
+gem 'sidekiq-cron'
+
+# Gives the short notation for large comprehensive numbers
+gem 'numerical_notation', '~> 0.0.2'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -75,12 +87,3 @@ group :test do
   gem "selenium-webdriver"
 
 end
-
-gem "cssbundling-rails", "~> 1.4"
-
-gem "jsbundling-rails", "~> 1.3"
-gem "font-awesome-sass", "~> 6.1" 
-gem 'font_awesome5_rails'
-gem "socialization"
-gem 'sidekiq-cron'
-gem 'numerical_notation', '~> 0.0.2'
