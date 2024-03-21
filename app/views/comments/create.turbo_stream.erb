@@ -18,4 +18,15 @@
       </div>
     </turbo-frame>
   </template>
+
+<turbo-stream action="replace" target="post_comment_form_<%= @post.id %>">
+  <template>
+    <%= turbo_frame_tag 'post_comment_form' do %>
+    <li >
+        <%= link_to new_post_comment_path(@post), class: "text-dark" do %>
+        <i class="fas fa-comments"></i> <%= pluralize(@post.comments.count, 'comment') %>
+        <% end %>
+    </li>
+<% end %>
+  </template>
 </turbo-stream>

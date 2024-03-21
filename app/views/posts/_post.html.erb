@@ -1,10 +1,3 @@
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
-  integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA="
-  crossorigin="anonymous"
-/>
-
 <div class="col-4">
   <div class="row mt-n5">
     <div
@@ -30,20 +23,36 @@
             <%= truncate(post.caption,length: 50) %>.
           </p>
           <div class="card-body text-center">
-            <%= link_to "View Post", post_path(post), class: "stretched-link link-dark" %>
+            <%= link_to "View Post", post_path(post), class: "link-dark" %>
           </div>
           <div class="meta meta-style2">
             <ul class="d-flex justify-content-between">
               <li>
-                  <p class="text-dark"><i class="fas fa-regular fa-heart"></i> <%= pluralize(post.likes.count, 'like') %></>
+                  <p class="text-dark">
+                    <turbo-frame id="likes_<%= post.id %>">
+                        <% if current_user_post_like?(post) %> 
+                          <%= link_to likes_path({post_id: post.id}), data: {turbo_method: :delete} do %> 
+                            <i class="fas fa-heart"></i>
+                          <% end %> 
+                        <% else %> 
+                          <%= link_to post_likes_path(post), data: {turbo_method: :post} do %> 
+                            <i class="fas fa-heart"></i>
+                          <% end %> 
+                        <% end %>
+                        <%= pluralize(post.likes.count, 'like') %> 
+                    </turbo-frame>
+                  </p>
+                    
               </li>
-              <%= turbo_frame_tag 'comment_form' do %>
+              <turbo-frame id="post_comment_form_<%= post.id %>">
+                <%= turbo_frame_tag 'comment_form' do %>
                 <li >
                   <%= link_to new_post_comment_path(post), class: "text-dark" do %>
                     <i class="fas fa-comments"></i> <%= pluralize(post.comments.count, 'comment') %>
                   <% end %>
                 </li>
               <% end %>
+              </turbo-frame>
               <li>
                 <p class="text-dark" ><i class="fas fa-eye"></i> <%= pluralize(post.views, 'view') %></>
               </li>
