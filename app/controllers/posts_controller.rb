@@ -25,6 +25,12 @@ class PostsController < ApplicationController
     @comments = @post.comments.fetch_post_comments
   end
 
+  def videos
+    @videos = ActiveStorage::Blob.select do |file|
+      ["mp4", "mov", "mkv", "webm"].any? { |ext| file.content_type.include?(ext) }
+    end     
+  end
+
   def turbo_frame_posts
   end
 

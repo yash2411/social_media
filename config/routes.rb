@@ -32,5 +32,6 @@ Rails.application.routes.draw do
   get 'followers_list', to: 'follows#friends_list'
   get 'followees', to: 'follows#followees_list'
   get 'followers', to: 'follows#followers_list'
+  get 'videos', to: 'posts#videos'
   
 end

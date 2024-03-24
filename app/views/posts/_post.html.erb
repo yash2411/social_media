@@ -15,7 +15,11 @@
             Posted by <%= post.user.first_name %> - <%= time_ago_in_words(post.created_at) %> ago
           </div>
           <% if post.medias.attached? %>
-            <%= image_tag file_path(post.medias.first), class: "rounded mx-auto d-block w-75 mt-2 " %>
+            <% if is_video?(post.medias.first.content_type) %>
+              <%= video_tag file_path(post.medias.first), :size => "320x240", :controls => true, class: "rounded mx-auto d-block w-75 mt-2 " %>
+            <% else %>
+              <%= image_tag file_path(post.medias.first), class: "rounded mx-auto d-block w-75 mt-2 " %>
+            <% end %>
           <% end %>
         </div>
         <div class="blog-grid-text p-4">
@@ -28,21 +32,20 @@
           <div class="meta meta-style2">
             <ul class="d-flex justify-content-between">
               <li>
-                  <p class="text-dark">
-                    <turbo-frame id="likes_<%= post.id %>">
-                        <% if current_user_post_like?(post) %> 
-                          <%= link_to likes_path({post_id: post.id}), data: {turbo_method: :delete} do %> 
-                            <i class="fas fa-heart"></i>
-                          <% end %> 
-                        <% else %> 
-                          <%= link_to post_likes_path(post), data: {turbo_method: :post} do %> 
-                            <i class="fas fa-heart"></i>
-                          <% end %> 
-                        <% end %>
-                        <%= pluralize(post.likes.count, 'like') %> 
-                    </turbo-frame>
-                  </p>
-                    
+                <p class="text-dark">
+                  <turbo-frame id="likes_<%= post.id %>">
+                      <% if current_user_post_like?(post) %> 
+                        <%= link_to likes_path({post_id: post.id}), data: {turbo_method: :delete} do %> 
+                          <i class="fas fa-heart"></i>
+                        <% end %> 
+                      <% else %> 
+                        <%= link_to post_likes_path(post), data: {turbo_method: :post} do %> 
+                          <i class="fas fa-heart"></i>
+                        <% end %> 
+                      <% end %>
+                      <%= pluralize(post.likes.count, 'like') %> 
+                  </turbo-frame>
+                </p>
               </li>
               <turbo-frame id="post_comment_form_<%= post.id %>">
                 <%= turbo_frame_tag 'comment_form' do %>

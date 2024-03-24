@@ -1,0 +1,5 @@
+<div class="container d-flex justify-content-center mt-4">
+    <% @videos.each do |video| %>
+        <%= video_tag file_path(video), size: "500x400", controls: true, autoplay: true, loop: true %>
+    <% end %>
+</div>

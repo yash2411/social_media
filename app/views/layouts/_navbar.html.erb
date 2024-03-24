@@ -19,6 +19,10 @@
               <%= link_to "My Posts", posts_path , class: "nav-link #{current_path?(posts_path)}" %>
             </li>
 
+            <li class="nav-item">
+              <%= link_to "Videos", videos_path , class: "nav-link #{current_path?(posts_path)}" %>
+            </li>
+
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <%= current_user.username %>
