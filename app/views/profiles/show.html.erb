@@ -66,15 +66,22 @@
                     <%= link_to "Show all", all_users_posts_path({id: @user.id}), class: "text-muted" %>
                 </p>
               </div>
-
               <div class="row">
                 <% if @user.posts.present? %>
                   <% @user.posts.limit(2).each do |post| %>
-                    <div class="col-6 mb-5">
-                      <%= link_to post_path({id: post.id}), data: {turbo: false} do %>
-                          <%= image_tag file_path(post.medias.first), class: "w-100 rounded-3" %>
-                      <% end %>
-                    </div>
+                    <% if is_video?(post.medias.first.content_type) %>
+                      <div class="col-6 mb-5">
+                        <%= link_to post_path({id: post.id}), data: {turbo: false} do %>
+                            <%= video_tag file_path(post.medias.first), :size => "320x240", :controls => true, class: "w-100 rounded-3" %>
+                        <% end %>
+                      </div>
+                    <% else %>
+                      <div class="col-6 mb-5">
+                        <%= link_to post_path({id: post.id}), data: {turbo: false} do %>
+                            <%= image_tag file_path(post.medias.first), class: "w-100 rounded-3" %>
+                        <% end %>
+                      </div>
+                    <% end %>
                   <% end %>
                 <% else %>
                   <div class="alert alert-success d-flex align-items-center" role="alert">

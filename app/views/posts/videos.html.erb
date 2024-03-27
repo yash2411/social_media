@@ -1,5 +1,12 @@
-<div class="container d-flex justify-content-center mt-4">
-    <% @videos.each do |video| %>
-        <%= video_tag file_path(video), size: "500x400", controls: true, autoplay: true, loop: true %>
-    <% end %>
-</div>
+<% @posts_with_video_attachments.each do |data| %>
+    <div class="blog-grid" style="background-color: #46b08fbd">
+        <div class="blog-grid-img position-relative">
+            <div class="card-header text-center mt-2">
+                Uploaded by <%= link_to data[:post].user.username, profile_path(data[:post].user), class: "text-dark", data_mdb_ripple_color: "dark", data: {turbo: false} %> 
+            </div>
+            <div class="container d-flex justify-content-center mt-4">
+                    <%= video_tag file_path(data[:video]), size: "500x400", controls: true, autoplay: true, loop: true %>
+            </div>
+        </div>
+    </div>
+<% end %>

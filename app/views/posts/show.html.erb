@@ -13,13 +13,19 @@
             <div class="row d-flex justify-content-center">
               <% if @post.medias.attached? %> 
                 <% @post.medias.each do |media| %>
-                  <div class="col-md-4">
-                    <img
-                      src="<%= file_path(media) %>"
-                      class="d-block w-100 img-fluid w-50 rounded m-1"
-                      alt="Image description for image"
-                    />
-                  </div>
+                  <% if is_video?(media.content_type) %>
+                    <div class="col-md-4">
+                      <%= video_tag file_path(media), :size => "320x240", :controls => true, class: "d-block w-100 img-fluid w-50 rounded m-1" %>
+                    </div>
+                  <% else %>
+                    <div class="col-md-4">
+                      <img
+                        src="<%= file_path(media) %>"
+                        class="d-block w-100 img-fluid w-50 rounded m-1"
+                        alt="Image description for image"
+                      />
+                    </div>
+                  <% end %>
                 <% end %> 
               <% end %>
             </div>

@@ -12,7 +12,10 @@
       <div class="blog-grid" style="background-color: #46b08fbd">
         <div class="blog-grid-img position-relative">
           <div class="card-header text-center mt-2">
-            Posted by <%= post.user.first_name %> - <%= time_ago_in_words(post.created_at) %> ago
+            <%= link_to profile_path(post.user), class: "text-dark", data_mdb_ripple_color: "dark", data: {turbo: false} do %>
+              Posted by <%= post.user.first_name %> - <%= time_ago_in_words(post.created_at) %> ago
+            <% end %>
+
           </div>
           <% if post.medias.attached? %>
             <% if is_video?(post.medias.first.content_type) %>

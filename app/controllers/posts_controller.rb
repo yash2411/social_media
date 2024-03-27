@@ -26,9 +26,17 @@ class PostsController < ApplicationController
   end
 
   def videos
-    @videos = ActiveStorage::Blob.select do |file|
-      ["mp4", "mov", "mkv", "webm"].any? { |ext| file.content_type.include?(ext) }
-    end     
+    @posts_with_video_attachments = []
+
+    posts = Post.last(10)
+    
+    posts.each do |post|
+      videos = post.video_attachments
+      videos.each do |video|
+        @posts_with_video_attachments << { post: post, video: video }
+      end
+    end
+    
   end
 
   def turbo_frame_posts
